@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 function GreetingPhrase(name) {
   return name ? `Hello, ${name}!` : `Hello, World!`;
@@ -44,6 +45,12 @@ function Home() {
 
   return (
     <>
+      <Link href="/signin">
+        <a>Sign In</a>
+      </Link>
+      <Link href="/signup">
+        <a>Try it out now!</a>
+      </Link>
       {GreetingPhrase(name)}
       <form onSubmit={handleSubmit}>
         <label>
