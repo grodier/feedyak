@@ -10,10 +10,11 @@ function ProtectedPage({ children }) {
   }
 
   if (!user) {
-    router.push('/');
+    router.push('/signin');
+  } else {
+    return <>{children}</>;
   }
-
-  return <>{children}</>;
+  return '';
 }
 
 export default ProtectedPage;

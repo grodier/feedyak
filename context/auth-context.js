@@ -2,22 +2,28 @@ import { useState, useEffect, useContext, createContext } from 'react';
 import {
   handleUserStateChanged,
   getCurrentUser,
-  signUpUser,
-  signInUser,
   signOutUser,
-} from '../firebase/firebaseAuth';
+  createUserData,
+  getUserData,
+} from '../utils/userUtils';
 
 const AuthContext = createContext();
 
 function AuthProvider(props) {
   const [user, setUser] = useState(getCurrentUser());
-  console.log(user);
   const [isPending, setIsPending] = useState(!user);
-  console.log(isPending);
 
-  async function onUserStateChanged(user) {
+  async function updateUser(user) {
+    console.log(user);
     if (user) {
-      setUser(user);
+      if (user.newUser) {
+        const newUserData = await createUserData(user);
+        setUser(newUserData);
+      } else {
+        const userData = await getUserData(user);
+        console.log(userData);
+        setUser(userData);
+      }
       return setIsPending(false);
     }
     setUser(user);
@@ -25,17 +31,15 @@ function AuthProvider(props) {
   }
 
   useEffect(() => {
-    const unsubscribe = handleUserStateChanged(onUserStateChanged);
+    const unsubscribe = handleUserStateChanged(updateUser);
     return () => unsubscribe();
   }, []);
 
-  const signUp = signUpUser;
-  const login = signInUser;
   const logout = signOutUser;
 
   return (
     <AuthContext.Provider
-      value={{ user, signUp, login, logout, isPending }}
+      value={{ user, logout, isPending, updateUser }}
       {...props}
     />
   );

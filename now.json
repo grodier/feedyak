@@ -1,0 +1,19 @@
+{
+  "build": {
+    "env": {
+      "FY_FIREBASE_PROJECT_ID": "@fy_firebase_project_id",
+      "FY_FIREBASE_PRIVATE_KEY_ID": "@fy_firebase_private_key_id",
+      "FY_FIREBASE_PRIVATE_KEY": "@fy_firebase_private_key",
+      "FY_FIREBASE_CLIENT_EMAIL": "@fy_firebase_client_email",
+      "FY_FIREBASE_CLIENT_ID": "@fy_firebase_client_id",
+      "FY_FIREBASE_CLIENT_X509_CERT_URL": "@fy_firebase_client_x509_cert_url",
+      "FY_FIREBASE_API_KEY": "@fy_firebase_api_key",
+      "FY_FIREBASE_AUTH_DOMAIN": "@fy_firebase_auth_domain",
+      "FY_FIREBASE_DATABASE_URL": "@fy_firebase_database_url",
+      "FY_FIREBASE_STORAGE_BUCKET": "@fy_firebase_storage_bucket",
+      "FY_FIREBASE_MESSAGING_SENDER_ID": "@fy_firebase_messaging_sender_id",
+      "FY_FIREBASE_APP_ID": "@fy_firebase_app_id",
+      "FY_FIREBASE_MEASUREMENT_ID": "@fy_firebase_measurement_id"
+    }
+  }
+}
