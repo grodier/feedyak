@@ -1,12 +1,17 @@
 import React from 'react';
 import App from 'next/app';
+import { AuthProvider } from '../context/auth-context';
 
 import '../styles/main.css';
 
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
-    return <Component {...pageProps} />;
+    return (
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
+    );
   }
 }
 
