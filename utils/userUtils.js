@@ -4,7 +4,7 @@ import { getUser, createUser } from './api';
 export function signUpUser(email, password, name, callback) {
   return auth
     .createUserWithEmailAndPassword(email, password)
-    .then(data => callback({ newUser: true, ...data.user }));
+    .then(data => callback({ ...data.user, name, newUser: true }));
 }
 
 export function signInUser(email, password) {
@@ -12,12 +12,11 @@ export function signInUser(email, password) {
 }
 
 export function getUserData(user) {
-  console.log(user);
   return getUser(user.uid);
 }
 
-export function createUserData(user, name) {
-  return createUser(user.uid, name, user.email);
+export function createUserData(user) {
+  return createUser(user.uid, user.name, user.email);
 }
 
 export function handleUserStateChanged(handler) {

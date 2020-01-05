@@ -11,5 +11,5 @@ export function createUser(userId, name, email) {
     email,
   };
 
-  return postRequest(`api/user`, userObj);
+  return postRequest(`api/user`, userObj).then(response => response.json());
 }

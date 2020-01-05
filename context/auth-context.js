@@ -14,14 +14,12 @@ function AuthProvider(props) {
   const [isPending, setIsPending] = useState(!user);
 
   async function updateUser(user) {
-    console.log(user);
     if (user) {
       if (user.newUser) {
         const newUserData = await createUserData(user);
         setUser(newUserData);
       } else {
         const userData = await getUserData(user);
-        console.log(userData);
         setUser(userData);
       }
       return setIsPending(false);
