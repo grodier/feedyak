@@ -37,7 +37,7 @@ function SignIn() {
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="email"
+            htmlFor="email"
           >
             Email
           </label>
@@ -51,7 +51,7 @@ function SignIn() {
             autoFocus
           />
           {current.matches('ready.email.error') && (
-            <p class="text-red-500 text-xs italic mt-2">
+            <p className="text-red-500 text-xs italic mt-2">
               {current.matches('ready.email.error.empty') &&
                 'Please enter your email.'}
               {current.matches('ready.email.error.invalid') &&
@@ -66,7 +66,7 @@ function SignIn() {
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="password"
+            htmlFor="password"
           >
             Password
           </label>
@@ -81,7 +81,7 @@ function SignIn() {
             disabled={current.matches('submitting')}
           />
           {current.matches('ready.password.error') && (
-            <p class="text-red-500 text-xs italic mt-2">
+            <p className="text-red-500 text-xs italic mt-2">
               {current.matches('ready.password.error.empty') &&
                 'Please enter your email.'}
               {current.matches('ready.password.error.wrong') &&

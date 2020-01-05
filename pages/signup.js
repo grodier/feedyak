@@ -47,7 +47,7 @@ function SignUp() {
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="name"
+            htmlFor="name"
           >
             Name
           </label>
@@ -63,13 +63,15 @@ function SignUp() {
             autoFocus
           />
           {current.matches('ready.name.error') && (
-            <p class="text-red-500 text-xs italic mt-2">Please enter a name.</p>
+            <p className="text-red-500 text-xs italic mt-2">
+              Please enter a name.
+            </p>
           )}
         </div>
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="email"
+            htmlFor="email"
           >
             Email
           </label>
@@ -84,7 +86,7 @@ function SignUp() {
             disabled={current.matches('submitting')}
           />
           {current.matches('ready.email.error') && (
-            <p class="text-red-500 text-xs italic mt-2">
+            <p className="text-red-500 text-xs italic mt-2">
               {current.matches('ready.email.error.empty') &&
                 'Please enter your email.'}
               {current.matches('ready.email.error.invalid') &&
@@ -97,7 +99,7 @@ function SignUp() {
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="password"
+            htmlFor="password"
           >
             Password
           </label>
@@ -112,7 +114,7 @@ function SignUp() {
             disabled={current.matches('submitting')}
           />
           {current.matches('ready.password.error') && (
-            <p class="text-red-500 text-xs italic mt-2">
+            <p className="text-red-500 text-xs italic mt-2">
               {current.matches('ready.password.error.empty') &&
                 'Please enter your password.'}
               {current.matches('ready.password.error.weak') &&
@@ -121,7 +123,7 @@ function SignUp() {
           )}
         </div>
         {current.matches('ready.otherErrors.error') && (
-          <p class="text-red-500 text-xs italic mt-2">
+          <p className="text-red-500 text-xs italic mt-2">
             An unexpected error occurred. Please try again.
           </p>
         )}

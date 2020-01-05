@@ -33,7 +33,7 @@ const guards = {
 function createServices(updateUser) {
   const services = {
     signUpUser: (context, event) =>
-      signUpUser(context.email, context.password, name, updateUser),
+      signUpUser(context.email, context.password, context.name, updateUser),
   };
   return services;
 }
