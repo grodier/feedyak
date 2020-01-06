@@ -17,9 +17,11 @@ function AuthProvider(props) {
     if (user) {
       if (user.newUser) {
         const newUserData = await createUserData(user);
+        console.log(newUserData);
         setUser(newUserData);
       } else {
         const userData = await getUserData(user);
+        console.log(userData);
         setUser(userData);
       }
       return setIsPending(false);
