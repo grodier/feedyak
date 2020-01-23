@@ -13,7 +13,11 @@
       "FY_FIREBASE_STORAGE_BUCKET": "@fy_firebase_storage_bucket",
       "FY_FIREBASE_MESSAGING_SENDER_ID": "@fy_firebase_messaging_sender_id",
       "FY_FIREBASE_APP_ID": "@fy_firebase_app_id",
-      "FY_FIREBASE_MEASUREMENT_ID": "@fy_firebase_measurement_id"
+      "FY_FIREBASE_MEASUREMENT_ID": "@fy_firebase_measurement_id",
+      "FY_FAUNADB_SERVER_SECRET": "@fy_faunadb_server_secret"
     }
+  },
+  "env": {
+    "FY_FAUNADB_SERVER_SECRET": "@fy_faunadb_server_secret"
   }
 }
