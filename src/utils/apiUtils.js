@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-fetch';
 import { getUserToken } from './userUtils';
 import { pipe } from './functional';
 
@@ -47,6 +48,15 @@ export async function getRequest(url) {
   const token = await getUserToken();
   const requestObj = pipe(addGetMethod, addAuthentication(token))({});
   return fetch(url, requestObj);
+}
+
+export async function getCookieRequest(url, session) {
+  const reqObj = pipe(
+    addPostMethod,
+    addBodyData({ session }),
+    addJSONConent
+  )({ credentials: 'same-origin' });
+  return fetch(url, reqObj);
 }
 
 export async function postRequest(url, data) {

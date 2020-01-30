@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
 require('dotenv').config();
-const serviceAccount = require('../googleCreds.json');
+const serviceAccount = require('../../googleCreds.json');
 
 !admin.apps.length
   ? admin.initializeApp({

@@ -1,20 +1,13 @@
 import { useMachine } from '@xstate/react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { createSignUpMachine } from '../src/machines/signUpMachine';
+import { createSignInMachine } from '../../machines/signInMachine';
 
-function SignUp() {
+function SignIn() {
   const router = useRouter();
   const reroute = () => router.push('/app');
 
-  const [current, send] = useMachine(createSignUpMachine(reroute));
-
-  const handleNameChange = event => {
-    send({
-      type: 'INPUT_NAME',
-      name: event.target.value,
-    });
-  };
+  const [current, send] = useMachine(createSignInMachine(reroute));
 
   const handleEmailChange = event => {
     send({
@@ -32,7 +25,6 @@ function SignUp() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log('SUMBIT', current);
     send({ type: 'SUBMIT' });
   };
 
@@ -45,43 +37,18 @@ function SignUp() {
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="name"
-          >
-            Name
-          </label>
-          <input
-            id="name"
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${current.matches(
-              'ready.name.error'
-            ) && 'border-red-500'}`}
-            type="text"
-            onChange={handleNameChange}
-            value={current.context.name}
-            disabled={current.matches('submitting')}
-            autoFocus
-          />
-          {current.matches('ready.name.error') && (
-            <p className="text-red-500 text-xs italic mt-2">
-              Please enter a name.
-            </p>
-          )}
-        </div>
-        <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="email"
           >
             Email
           </label>
           <input
             id="email"
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${current.matches(
-              'ready.email.error'
-            ) && 'border-red-500'}`}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
             onChange={handleEmailChange}
             value={current.context.email}
             disabled={current.matches('submitting')}
+            autoFocus
           />
           {current.matches('ready.email.error') && (
             <p className="text-red-500 text-xs italic mt-2">
@@ -89,8 +56,10 @@ function SignUp() {
                 'Please enter your email.'}
               {current.matches('ready.email.error.invalid') &&
                 'Please enter a valid email address.'}
-              {current.matches('ready.email.error.alreadyInUse') &&
-                'Email address is already in use. Please try another.'}
+              {current.matches('ready.email.error.userNotFound') &&
+                'User not found. Please try another email or sign up.'}
+              {current.matches('ready.email.error.userDisabled') &&
+                'User has been disabled. Please try another email or try again later.'}
             </p>
           )}
         </div>
@@ -106,7 +75,7 @@ function SignUp() {
             className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${current.matches(
               'ready.password.error'
             ) && 'border-red-500'}`}
-            type="password"
+            type="text"
             onChange={handlePasswordChange}
             value={current.context.password}
             disabled={current.matches('submitting')}
@@ -114,29 +83,30 @@ function SignUp() {
           {current.matches('ready.password.error') && (
             <p className="text-red-500 text-xs italic mt-2">
               {current.matches('ready.password.error.empty') &&
-                'Please enter your password.'}
-              {current.matches('ready.password.error.weak') &&
-                'Password should be at least 6 characters.'}
+                'Please enter your email.'}
+              {current.matches('ready.password.error.wrong') &&
+                'Password is not correct. Please provide a correct password.'}
             </p>
           )}
         </div>
-        {current.matches('ready.otherErrors.error') && (
-          <p className="text-red-500 text-xs italic mt-2">
-            An unexpected error occurred. Please try again.
-          </p>
-        )}
+        {current.matches('ready.otherErrors.error') && <div>OTHER ERROR</div>}
         <button
           type="submit"
           className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          Sign Up
+          Sign In
         </button>
+        <Link href="/">
+          <a className="block mt-2 mx-auto text-center align-baseline font-bold text-blue-500 hover:text-blue-800">
+            Forgot Password?
+          </a>
+        </Link>
         <hr className="my-6"></hr>
         <p>
-          Already have an account?{' '}
-          <Link href="/signin">
+          Don't have an account?{' '}
+          <Link href="/signup">
             <a className="inline-block align-baseline font-bold text-blue-500 hover:text-blue-800">
-              Sign In
+              Sign Up
             </a>
           </Link>
         </p>
@@ -145,4 +115,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignIn;
