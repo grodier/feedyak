@@ -4,7 +4,7 @@ require('dotenv').config();
 const creds = {
   type: 'service_account',
   project_id: process.env.FY_FIREBASE_PROJECT_ID,
-  private_key_id: process.env.FY_FIREBASE_PRIVATE_KEY_ID,
+  private_key_id: process.env.FY_FIREBASE_PRIVATE_KEY_ID.replace(/\\n/g, '\n'),
   private_key: process.env.FY_FIREBASE_PRIVATE_KEY,
   client_email: process.env.FY_FIREBASE_CLIENT_EMAIL,
   client_id: process.env.FY_FOREBASE_CLIENT_ID,
