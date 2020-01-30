@@ -47,7 +47,7 @@ function addBodyData(dataObj) {
 export async function getRequest(url) {
   const token = await getUserToken();
   const requestObj = pipe(addGetMethod, addAuthentication(token))({});
-  return fetch(`http://localhost:3000${url}`, requestObj);
+  return fetch(url, requestObj);
 }
 
 export async function getCookieRequest(url, session) {
@@ -56,8 +56,7 @@ export async function getCookieRequest(url, session) {
     addBodyData({ session }),
     addJSONConent
   )({ credentials: 'same-origin' });
-  console.log('REQOBJ', reqObj);
-  return fetch(`http://localhost:3000${url}`, reqObj);
+  return fetch(url, reqObj);
 }
 
 export async function postRequest(url, data) {
@@ -68,5 +67,5 @@ export async function postRequest(url, data) {
     addBodyData(data),
     addJSONConent
   )({});
-  return fetch(`http://localhost:3000${url}`, requestObj);
+  return fetch(url, requestObj);
 }

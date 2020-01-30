@@ -1,10 +1,8 @@
 import { getCookieRequest, postRequest } from './apiUtils';
 
-export function getUser(userId, cookies) {
-  return getCookieRequest(
-    `/api/user/${userId}`,
-    cookies.session
-  ).then(response => response.json());
+export function getUser(session, origin) {
+  const url = `${origin || ''}/api/user/${userId}`;
+  return getCookieRequest(url, session).then(response => response.json());
 }
 
 export function createUser(userId, name, email) {
@@ -18,22 +16,13 @@ export function createUser(userId, name, email) {
 }
 
 export function loginSession() {
-  console.log('loging call');
-  return postRequest(`/api/login-session`, {}).then(async response => {
-    console.log('Response', response);
-    try {
-      const myresponse = await response.json();
-      console.log('MYRESPONSE', myresponse);
-      return myresponse;
-    } catch (error) {
-      console.log(error);
-      return response;
-    }
-  });
+  return postRequest(`/api/login-session`, {}).then(async response =>
+    response.json()
+  );
 }
 
 export function logoutSession() {
-  return postRequest(`api/logout-session`, {}).then(response =>
+  return postRequest(`/api/logout-session`, {}).then(response =>
     response.json()
   );
 }

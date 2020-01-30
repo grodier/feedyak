@@ -1,5 +1,6 @@
 import React from 'react';
 import nextCookie from 'next-cookies';
+import absoluteUrl from 'next-absolute-url';
 import ProtectedPage from '../../components/ProtectedPage';
 import { getUserData } from '../../utils/userUtils';
 
@@ -12,11 +13,12 @@ const App = ({ loggedIn }) => {
 };
 
 App.getInitialProps = async ctx => {
-  const cookies = nextCookie(ctx);
-  if (cookies.session) {
-    const user = await getUserData('1234', cookies);
+  const { session } = nextCookie(ctx);
+  if (session) {
+    const { origin } = absoluteUrl(ctx.req);
+    const user = await getUserData(session, origin);
   }
-  if (!cookies.session) return { loggedIn: false };
+  if (!session) return { loggedIn: false };
   return { loggedIn: true };
 };
 
