@@ -1,11 +1,3 @@
-import React from 'react';
-import ProtectedPage from '../components/ProtectedPage';
-const App = () => {
-  return (
-    <ProtectedPage>
-      <div>Hello from my App</div>
-    </ProtectedPage>
-  );
-};
+import App from '../src/screens/App';
 
 export default App;

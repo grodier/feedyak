@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-fetch';
 import { getUserToken } from './userUtils';
 import { pipe } from './functional';
 
@@ -46,7 +47,17 @@ function addBodyData(dataObj) {
 export async function getRequest(url) {
   const token = await getUserToken();
   const requestObj = pipe(addGetMethod, addAuthentication(token))({});
-  return fetch(url, requestObj);
+  return fetch(`http://localhost:3000${url}`, requestObj);
+}
+
+export async function getCookieRequest(url, session) {
+  const reqObj = pipe(
+    addPostMethod,
+    addBodyData({ session }),
+    addJSONConent
+  )({ credentials: 'same-origin' });
+  console.log('REQOBJ', reqObj);
+  return fetch(`http://localhost:3000${url}`, reqObj);
 }
 
 export async function postRequest(url, data) {
@@ -57,5 +68,5 @@ export async function postRequest(url, data) {
     addBodyData(data),
     addJSONConent
   )({});
-  return fetch(url, requestObj);
+  return fetch(`http://localhost:3000${url}`, requestObj);
 }

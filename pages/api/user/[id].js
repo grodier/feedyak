@@ -1,5 +1,5 @@
 import faunadb from 'faunadb';
-import { auth } from '../../../firebase/firebase-server';
+import { auth } from '../../../src/firebase/firebase-server';
 
 const q = faunadb.query;
 const client = new faunadb.Client({
@@ -7,10 +7,12 @@ const client = new faunadb.Client({
 });
 
 async function getUser(req, res) {
-  const authToken = req.headers.authorization.split(' ')[1];
-  const userInfo = await auth.verifyIdToken(authToken);
-  const uid = req.query.id;
-  console.log('UID', uid);
+  console.log('REQ', req.body);
+  console.log('COOKIE', req);
+  const sessionCookie = req.cookies.session || req.body.session || '';
+  console.log('SESSION OF GET', sessionCookie);
+  const decodedToken = await auth.verifySessionCookie(sessionCookie, true);
+  const { uid } = decodedToken;
   try {
     const response = await client.query(
       q.Get(q.Match(q.Index('user_by_uid'), uid))
