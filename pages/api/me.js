@@ -1,5 +1,5 @@
 import faunadb from 'faunadb';
-import { auth } from '../../../src/firebase/firebase-server';
+import { auth } from '../../src/firebase/firebase-server';
 
 const q = faunadb.query;
 const client = new faunadb.Client({

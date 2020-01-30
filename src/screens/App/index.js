@@ -2,7 +2,7 @@ import React from 'react';
 import nextCookie from 'next-cookies';
 import absoluteUrl from 'next-absolute-url';
 import ProtectedPage from '../../components/ProtectedPage';
-import { getMe } from '../../utils/userUtils';
+import { getMeData } from '../../utils/userUtils';
 
 const App = ({ loggedIn }) => {
   return (
@@ -16,7 +16,7 @@ App.getInitialProps = async ctx => {
   const { session } = nextCookie(ctx);
   if (session) {
     const { origin } = absoluteUrl(ctx.req);
-    const user = await getMe(session, origin);
+    const user = await getMeData(session, origin);
   }
   if (!session) return { loggedIn: false };
   return { loggedIn: true };

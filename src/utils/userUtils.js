@@ -1,7 +1,7 @@
 import { auth } from '../firebase/firebase-client';
 import cookie from 'js-cookie';
 
-import { getUser, createUser, loginSession, logoutSession } from './api';
+import { getUser, createUser, loginSession, logoutSession, getMe } from './api';
 
 export function getCookie(name) {
   var re = new RegExp(name + '=([^;]+)');
@@ -18,21 +18,22 @@ export function signUpUser(email, password, name, callback) {
 }
 
 export function signInUser(email, password) {
-  console.log(email);
   return auth
     .signInWithEmailAndPassword(email, password)
     .then(user => {
-      console.log(user);
       return loginSession();
     })
     .then(data => {
-      console.log('SESSION', data);
       cookie.set('session', data.sessionToken);
     });
 }
 
-export function getUserData(uid, cookies) {
-  return getUser(uid, cookies);
+export function getUserData(uid) {
+  return getUser(uid);
+}
+
+export function getMeData(session, origin) {
+  return getMe(session, origin);
 }
 
 export function createUserData(user) {
