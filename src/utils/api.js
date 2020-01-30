@@ -1,7 +1,12 @@
 import { getCookieRequest, postRequest } from './apiUtils';
 
-export function getUser(session, origin) {
-  const url = `${origin || ''}/api/user/${userId}`;
+export function getUser(userId) {
+  const url = `/api/user/${userId}`;
+  return getRequest(url).then(response => response.json());
+}
+
+export function getMe(session, origin) {
+  const url = `${origin || ''}/api/me`;
   return getCookieRequest(url, session).then(response => response.json());
 }
 
