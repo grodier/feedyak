@@ -8,7 +8,6 @@ const client = new faunadb.Client({
 
 async function getMe(req, res) {
   const sessionCookie = req.cookies.session || req.body.session || '';
-  console.log('SESSION OF GET', sessionCookie);
   const decodedToken = await auth.verifySessionCookie(sessionCookie, true);
   const { uid } = decodedToken;
   try {
