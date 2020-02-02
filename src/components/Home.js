@@ -25,7 +25,6 @@ function Home() {
         method: 'GET',
       });
       const json = await response.json();
-      console.log(json);
       setName(json.name);
     };
     fetchData();

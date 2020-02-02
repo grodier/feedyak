@@ -32,7 +32,6 @@ function SignUp() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log('SUMBIT', current);
     send({ type: 'SUBMIT' });
   };
 

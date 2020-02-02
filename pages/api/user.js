@@ -18,10 +18,8 @@ async function createUser(req, res) {
     const response = await client.query(
       q.Create(q.Collection('users'), newUser)
     );
-    console.log('Response', response);
     res.status(200).json(response);
   } catch (error) {
-    console.log('ERROR', error);
     res.status(400).json(error);
   }
 }

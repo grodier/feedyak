@@ -10,7 +10,6 @@ function ProtectedPage({ loggedIn, children }) {
   useEffect(() => {
     if (loggedIn) return;
     const { pathname } = router;
-    console.log(`Pathname: ${pathname}`);
     router.replace(pathname, '/signin', { shallow: true });
   }, [loggedIn]);
 
