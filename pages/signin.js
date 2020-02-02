@@ -1,3 +1,3 @@
-import SignIn from '../src/screens/SignIn';
+import SignIn from '../src/components/SignIn';
 
 export default SignIn;

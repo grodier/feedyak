@@ -1,8 +1,8 @@
 import React from 'react';
 import nextCookie from 'next-cookies';
 import absoluteUrl from 'next-absolute-url';
-import ProtectedPage from '../../components/ProtectedPage';
-import { getMeData } from '../../utils/userUtils';
+import ProtectedPage from './ProtectedPage';
+import { getMeData } from '../utils/userUtils';
 
 const App = ({ loggedIn }) => {
   return (

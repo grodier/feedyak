@@ -1,7 +1,7 @@
 import { useMachine } from '@xstate/react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { createSignInMachine } from '../../machines/signInMachine';
+import { createSignInMachine } from '../machines/signInMachine';
 
 function SignIn() {
   const router = useRouter();

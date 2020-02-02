@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
-const SignIn = dynamic(() => import('../screens/SignIn'));
+const SignIn = dynamic(() => import('./SignIn'));
 
 function ProtectedPage({ loggedIn, children }) {
   const router = useRouter();
