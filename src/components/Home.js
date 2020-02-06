@@ -4,12 +4,17 @@ import Link from 'next/link';
 function Home() {
   return (
     <>
-      <Link href="/signin">
-        <a>Sign In</a>
-      </Link>
-      <Link href="/signup">
-        <a>Try it out now!</a>
-      </Link>
+      <header className="flex justify-between p-6">
+        <div>FeedYak</div>
+        <div>
+          <Link href="/signin">
+            <a>Sign In</a>
+          </Link>
+          <Link href="/signup">
+            <a>Try it out now!</a>
+          </Link>
+        </div>
+      </header>
     </>
   );
 }
