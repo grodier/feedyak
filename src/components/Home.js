@@ -7,7 +7,7 @@ function Home() {
       <header className="flex justify-between p-6">
         <div>FeedYak</div>
         <div>
-          <Link href="/signin">
+          <Link href="/app">
             <a>Sign In</a>
           </Link>
           <Link href="/signup">
