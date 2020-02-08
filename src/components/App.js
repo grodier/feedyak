@@ -8,6 +8,7 @@ const App = ({ loggedIn }) => {
   return (
     <ProtectedPage loggedIn={loggedIn}>
       <div>Hello from my App</div>
+      <button>Logout</button>
     </ProtectedPage>
   );
 };
