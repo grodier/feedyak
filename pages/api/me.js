@@ -8,15 +8,19 @@ const client = new faunadb.Client({
 
 async function getMe(req, res) {
   const sessionCookie = req.cookies.session || req.body.session || '';
-  const decodedToken = await auth.verifySessionCookie(sessionCookie, true);
-  const { uid } = decodedToken;
   try {
-    const response = await client.query(
-      q.Get(q.Match(q.Index('user_by_uid'), uid))
-    );
-    res.status(200).json(response);
+    const decodedToken = await auth.verifySessionCookie(sessionCookie, true);
+    const { uid } = decodedToken;
+    try {
+      const response = await client.query(
+        q.Get(q.Match(q.Index('user_by_uid'), uid))
+      );
+      res.status(200).json(response);
+    } catch (error) {
+      res.status(400).json(error);
+    }
   } catch (error) {
-    res.status(400).json(error);
+    res.status(401).json(error);
   }
 }
 
