@@ -16,10 +16,16 @@ App.getInitialProps = async ctx => {
   const { session } = nextCookie(ctx);
   if (session) {
     const { origin } = absoluteUrl(ctx.req);
-    const user = await getMeData(session, origin);
+    try {
+      const user = await getMeData(session, origin);
+      return { user, loggedIn: true };
+    } catch (error) {
+      if (error.code === 'auth/session-cookie-expire') {
+        return { user: null, loggedIn: false };
+      }
+    }
   }
-  if (!session) return { loggedIn: false };
-  return { loggedIn: true };
+  return { user: null, loggedIn: false };
 };
 
 export default App;
