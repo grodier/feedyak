@@ -50,7 +50,7 @@ export async function getRequest(url) {
   return fetch(url, requestObj);
 }
 
-export async function getCookieRequest(url, session) {
+export async function postCookieRequest(url, session) {
   const reqObj = pipe(
     addPostMethod,
     addBodyData({ session }),
