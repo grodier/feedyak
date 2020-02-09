@@ -9,13 +9,13 @@ const App = ({ loggedIn, session, user }) => {
   const router = useRouter();
 
   async function logout() {
-    await signOutUser(session);
+    signOutUser(session);
     router.push('/signin');
   }
 
   return (
     <ProtectedPage loggedIn={loggedIn}>
-      <div>Hello {user.name}!</div>
+      <div>Hello {loggedIn && user.name}!</div>
       <button onClick={logout}>Sign Out</button>
     </ProtectedPage>
   );
