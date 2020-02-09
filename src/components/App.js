@@ -15,7 +15,7 @@ const App = ({ loggedIn, session, user }) => {
 
   return (
     <ProtectedPage loggedIn={loggedIn}>
-      <div>Hello {user.name}!</div>
+      <div>Hello {loggedIn && user.name}!</div>
       <button onClick={logout}>Sign Out</button>
     </ProtectedPage>
   );
