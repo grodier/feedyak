@@ -44,8 +44,8 @@ export function handleUserStateChanged(handler) {
   return auth.onAuthStateChanged(handler);
 }
 
-export function signOutUser() {
-  return auth.signOutUser().then(user => logoutSession());
+export function signOutUser(session) {
+  return auth.signOut().then(async user => await logoutSession(session));
 }
 
 export function getCurrentUser() {

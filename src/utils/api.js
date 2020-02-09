@@ -1,4 +1,4 @@
-import { getCookieRequest, postRequest } from './apiUtils';
+import { postCookieRequest, postRequest } from './apiUtils';
 import CustomError from './error';
 
 export function getUser(userId) {
@@ -8,7 +8,7 @@ export function getUser(userId) {
 
 export function getMe(session, origin) {
   const url = `${origin || ''}/api/me`;
-  return getCookieRequest(url, session).then(async response => {
+  return postCookieRequest(url, session).then(async response => {
     if (response.status === 401) {
       const jsonResponse = await response.json();
       throw new CustomError(jsonResponse.message, jsonResponse.code);
@@ -33,8 +33,8 @@ export function loginSession() {
   );
 }
 
-export function logoutSession() {
-  return postRequest(`/api/logout-session`, {}).then(response =>
+export function logoutSession(session) {
+  return postCookieRequest(`/api/logout-session`, session).then(response =>
     response.json()
   );
 }
