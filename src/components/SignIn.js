@@ -75,7 +75,7 @@ function SignIn() {
             className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${current.matches(
               'ready.password.error'
             ) && 'border-red-500'}`}
-            type="text"
+            type="password"
             onChange={handlePasswordChange}
             value={current.context.password}
             disabled={current.matches('submitting')}

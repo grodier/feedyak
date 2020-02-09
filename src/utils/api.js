@@ -13,7 +13,8 @@ export function getMe(session, origin) {
       const jsonResponse = await response.json();
       throw new CustomError(jsonResponse.message, jsonResponse.code);
     }
-    return response.json();
+    const { data } = await response.json();
+    return data;
   });
 }
 
