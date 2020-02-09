@@ -9,7 +9,7 @@ const App = ({ loggedIn, session, user }) => {
   const router = useRouter();
 
   async function logout() {
-    await signOutUser(session);
+    signOutUser(session);
     router.push('/signin');
   }
 
