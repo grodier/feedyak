@@ -5,7 +5,7 @@ import absoluteUrl from 'next-absolute-url';
 import ProtectedPage from './ProtectedPage';
 import { getMeData, signOutUser } from '../utils/userUtils';
 
-const App = ({ loggedIn, session }) => {
+const App = ({ loggedIn, session, user }) => {
   const router = useRouter();
 
   async function logout() {
@@ -15,7 +15,7 @@ const App = ({ loggedIn, session }) => {
 
   return (
     <ProtectedPage loggedIn={loggedIn}>
-      <div>Hello from my App</div>
+      <div>Hello {user.name}!</div>
       <button onClick={logout}>Sign Out</button>
     </ProtectedPage>
   );
@@ -27,6 +27,7 @@ App.getInitialProps = async ctx => {
     const { origin } = absoluteUrl(ctx.req);
     try {
       const user = await getMeData(session, origin);
+      console.log('USER', user);
       return { user, loggedIn: true, session };
     } catch (error) {
       if (error.code === 'auth/session-cookie-expire') {
