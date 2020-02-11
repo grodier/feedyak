@@ -37,7 +37,6 @@ App.getInitialProps = async ctx => {
     const { origin } = absoluteUrl(ctx.req);
     try {
       const user = await getMeData(session, origin);
-      console.log('USER', user);
       return { user, loggedIn: true, session };
     } catch (error) {
       if (error.code === 'auth/session-cookie-expire') {
