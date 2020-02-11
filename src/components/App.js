@@ -18,7 +18,12 @@ const App = ({ loggedIn, session, user }) => {
       <header className="p-6 border-b border-gray-300">
         <div className="flex justify-between container mx-auto">
           <div>FeedYak</div>
-          <button onClick={logout}>Sign Out</button>
+          <button
+            className="border border-blue-600 p-2 rounded"
+            onClick={logout}
+          >
+            Sign Out
+          </button>
         </div>
       </header>
       <div>Hello {loggedIn && user.name}!</div>
