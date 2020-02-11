@@ -16,7 +16,7 @@ const App = ({ loggedIn, session, user }) => {
   return (
     <ProtectedPage loggedIn={loggedIn}>
       <header className="p-6 border-b border-gray-300">
-        <div className="flex justify-between container mx-auto">
+        <div className="flex justify-between items-center container mx-auto">
           <div>FeedYak</div>
           <button
             className="border border-blue-600 p-2 rounded"
