@@ -55,3 +55,5 @@ export function getCurrentUser() {
 export async function getUserToken() {
   return auth.currentUser.getIdToken();
 }
+
+auth.onAuthStateChanged(user => console.log('CHANGE', user));
