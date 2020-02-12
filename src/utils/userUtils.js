@@ -9,7 +9,7 @@ export function getCookie(name) {
   return value != null ? unescape(value[1]) : null;
 }
 
-export function signUpUser(email, password, name, callback) {
+export function signUpUser(email, password, name) {
   return auth
     .createUserWithEmailAndPassword(email, password)
     .then(data => createUserData({ ...data.user, name }))
