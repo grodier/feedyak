@@ -30,19 +30,19 @@ const guards = {
   isWeakPassword,
 };
 
-function createServices(updateUser) {
+function createServices() {
   const services = {
     signUpUser: (context, event) =>
-      signUpUser(context.email, context.password, context.name, updateUser),
+      signUpUser(context.email, context.password, context.name),
   };
   return services;
 }
 
-export function initMachineOptions(reroute, updateUser) {
+export function initMachineOptions(reroute) {
   const machineOptions = {
     actions: { ...actions, reroute },
     guards,
-    services: createServices(updateUser),
+    services: createServices(),
   };
 
   return machineOptions;

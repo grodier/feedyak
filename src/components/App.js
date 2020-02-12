@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useMachine } from '@xstate/react';
 import { useRouter } from 'next/router';
 import nextCookie from 'next-cookies';
 import absoluteUrl from 'next-absolute-url';
 import ProtectedPage from './ProtectedPage';
 import { getMeData, signOutUser } from '../utils/userUtils';
+import { createFeedBackMachine } from '../machines/feedBackMachine';
 
 const App = ({ loggedIn, session, user }) => {
+  const [current, send] = useMachine(createFeedBackMachine());
+
   const router = useRouter();
 
   async function logout() {
@@ -13,20 +17,34 @@ const App = ({ loggedIn, session, user }) => {
     router.push('/signin');
   }
 
+  useEffect(() => {
+    if (loggedIn) send('LOAD');
+  }, [loggedIn]);
+
   return (
     <ProtectedPage loggedIn={loggedIn}>
-      <header className="p-6 border-b border-gray-300">
-        <div className="flex justify-between items-center container mx-auto">
-          <div>FeedYak</div>
-          <button
-            className="border border-blue-600 p-2 rounded"
-            onClick={logout}
-          >
-            Sign Out
-          </button>
+      {loggedIn && (
+        <div>
+          <header className="p-6 border-b border-gray-300">
+            <div className="flex justify-between items-center container mx-auto">
+              <div>FeedYak</div>
+              <button
+                className="border border-blue-600 p-2 rounded"
+                onClick={logout}
+              >
+                Sign Out
+              </button>
+            </div>
+          </header>
+          <div>Hello {user.name}!</div>
+          {current.matches('requesting') && 'Loading...'}
+          <ul>
+            {current.matches('idle') &&
+              loggedIn &&
+              current.context.feedback.map(item => <li key={item}>{item}</li>)}
+          </ul>
         </div>
-      </header>
-      <div>Hello {loggedIn && user.name}!</div>
+      )}
     </ProtectedPage>
   );
 };

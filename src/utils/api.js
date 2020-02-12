@@ -1,4 +1,4 @@
-import { postCookieRequest, postRequest } from './apiUtils';
+import { postCookieRequest, postRequest, getRequest } from './apiUtils';
 import CustomError from './error';
 
 export function getUser(userId) {
@@ -38,4 +38,15 @@ export function logoutSession(session) {
   return postCookieRequest(`/api/logout-session`, session).then(response =>
     response.json()
   );
+}
+
+export function getFeedback() {
+  //const feedback = ['item 1', 'item2', "here's some more feedback"];
+  return getRequest(`/api/feedback`)
+    .then(response => {
+      return response.json();
+    })
+    .catch(error => {
+      console.log(error);
+    });
 }
