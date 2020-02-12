@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useMachine } from '@xstate/react';
 import { useRouter } from 'next/router';
 import nextCookie from 'next-cookies';
@@ -16,6 +16,10 @@ const App = ({ loggedIn, session, user }) => {
     signOutUser(session);
     router.push('/signin');
   }
+
+  useEffect(() => {
+    if (loggedIn) send('LOAD');
+  }, [loggedIn]);
 
   return (
     <ProtectedPage loggedIn={loggedIn}>

@@ -3,10 +3,13 @@ export const feedBackMachineConfig = {
   context: {
     feedback: [],
   },
-  initial: 'requesting',
+  initial: 'idle',
   states: {
     idle: {
       initial: 'noError',
+      on: {
+        LOAD: 'requesting',
+      },
       states: {
         error: {},
         noError: {},
